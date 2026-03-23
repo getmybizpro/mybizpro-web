@@ -3,565 +3,480 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MyBizPro — Logiciel de Devis pour Ingénieurs en Guinée</title>
-  <meta name="description" content="MyBizPro est le premier logiciel de devis professionnel pour ingénieurs en Guinée. Gérez vos devis, clients et projets facilement." />
+  <title>MyBizPro — Logiciel de Devis Professionnel pour Ingénieurs</title>
+  <meta name="description" content="MyBizPro est le logiciel tout-en-un de devis et gestion de projets pour ingénieurs et professionnels de la construction." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    /* ── RESET & BASE ─────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --primary:   #0D47A1;
+      --primary:       #0D47A1;
       --primary-light: #1565C0;
-      --accent:    #FF6F00;
-      --success:   #2E7D32;
-      --bg:        #F8FAFF;
-      --card:      #FFFFFF;
-      --text:      #1A1A2E;
-      --muted:     #6B7280;
-      --border:    #E5E7EB;
-      --radius:    16px;
+      --accent:        #FF6F00;
+      --success:       #2E7D32;
+      --bg:            #F8FAFF;
+      --card:          #FFFFFF;
+      --text:          #1A1A2E;
+      --muted:         #6B7280;
+      --border:        #E5E7EB;
+      --radius:        16px;
     }
     html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
     a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; }
 
-    /* ── NAVBAR ──────────────────────────────────────────────── */
     nav {
       position: sticky; top: 0; z-index: 100;
       background: var(--primary);
-      padding: 0 24px;
+      padding: 0 32px;
       display: flex; align-items: center; justify-content: space-between;
       height: 64px;
       box-shadow: 0 2px 12px rgba(0,0,0,0.2);
     }
-    .nav-logo {
-      font-size: 22px; font-weight: 800;
-      color: #fff; letter-spacing: -0.5px;
-    }
+    .nav-logo { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
     .nav-logo span { color: #FFD54F; }
-    .nav-cta {
-      background: var(--accent);
-      color: #fff;
-      padding: 8px 20px;
-      border-radius: 30px;
-      font-weight: 600;
-      font-size: 14px;
-      transition: opacity .2s;
-    }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { color: rgba(255,255,255,.8); font-size: 14px; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta { background: var(--accent); color: #fff; padding: 9px 22px; border-radius: 30px; font-weight: 700; font-size: 14px; transition: opacity .2s; }
     .nav-cta:hover { opacity: .85; }
+    @media (max-width: 640px) { .nav-links { display: none; } }
 
-    /* ── HERO ────────────────────────────────────────────────── */
     .hero {
-      background: linear-gradient(135deg, var(--primary) 0%, #1976D2 100%);
-      color: #fff;
-      text-align: center;
-      padding: 80px 24px 100px;
+      background: linear-gradient(135deg, #0A2472 0%, #0D47A1 50%, #1976D2 100%);
+      color: #fff; text-align: center;
+      padding: 96px 24px 120px;
+      position: relative; overflow: hidden;
     }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-content { position: relative; z-index: 1; }
     .badge {
-      display: inline-block;
-      background: rgba(255,255,255,0.15);
-      color: #FFD54F;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.12); color: #FFD54F;
       font-size: 13px; font-weight: 600;
-      padding: 6px 16px; border-radius: 30px;
-      margin-bottom: 24px;
-      border: 1px solid rgba(255,213,79,0.4);
+      padding: 7px 18px; border-radius: 30px; margin-bottom: 28px;
+      border: 1px solid rgba(255,213,79,0.3); backdrop-filter: blur(4px);
     }
-    .hero h1 {
-      font-size: clamp(36px, 7vw, 64px);
-      font-weight: 800; letter-spacing: -1.5px;
-      line-height: 1.1;
-      margin-bottom: 8px;
-    }
+    .hero h1 { font-size: clamp(38px, 7vw, 68px); font-weight: 800; letter-spacing: -2px; line-height: 1.05; margin-bottom: 10px; }
     .hero h1 span { color: #FFD54F; }
-    .hero p.tagline {
-      font-size: clamp(16px, 2.5vw, 20px);
-      opacity: .85; margin-bottom: 40px;
-      max-width: 520px; margin-left: auto; margin-right: auto;
-    }
+    .hero p.tagline { font-size: clamp(16px, 2.5vw, 20px); opacity: .8; max-width: 560px; margin: 0 auto 44px; }
     .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
     .btn-primary {
-      background: var(--accent);
-      color: #fff; font-weight: 700; font-size: 16px;
-      padding: 16px 32px; border-radius: 50px;
-      display: inline-flex; align-items: center; gap: 8px;
-      box-shadow: 0 4px 20px rgba(255,111,0,.4);
+      background: var(--accent); color: #fff; font-weight: 700; font-size: 16px;
+      padding: 16px 36px; border-radius: 50px;
+      display: inline-flex; align-items: center; gap: 10px;
+      box-shadow: 0 4px 24px rgba(255,111,0,.45);
       transition: transform .2s, box-shadow .2s;
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(255,111,0,.5); }
-    .btn-secondary {
-      background: rgba(255,255,255,0.15);
-      color: #fff; font-weight: 600; font-size: 16px;
-      padding: 16px 32px; border-radius: 50px;
-      border: 2px solid rgba(255,255,255,.4);
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,111,0,.55); }
+    .btn-ghost {
+      background: rgba(255,255,255,0.12); color: #fff; font-weight: 600; font-size: 16px;
+      padding: 16px 36px; border-radius: 50px;
+      border: 2px solid rgba(255,255,255,.35); backdrop-filter: blur(4px);
       transition: background .2s;
     }
-    .btn-secondary:hover { background: rgba(255,255,255,0.25); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.22); }
 
-    /* ── STATS BAR ───────────────────────────────────────────── */
-    .stats {
-      background: var(--card);
-      border-bottom: 1px solid var(--border);
+    .trust-bar {
+      background: var(--card); border-bottom: 1px solid var(--border);
       padding: 28px 24px;
-      display: flex; justify-content: center; flex-wrap: wrap; gap: 40px;
-      text-align: center;
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 48px; text-align: center;
     }
-    .stat-item strong { display: block; font-size: 28px; font-weight: 800; color: var(--primary); }
-    .stat-item span { font-size: 13px; color: var(--muted); }
+    .trust-item strong { display: block; font-size: 30px; font-weight: 800; color: var(--primary); }
+    .trust-item span { font-size: 13px; color: var(--muted); font-weight: 500; }
 
-    /* ── SECTION ─────────────────────────────────────────────── */
-    section { padding: 72px 24px; }
-    .container { max-width: 1000px; margin: 0 auto; }
-    .section-title {
-      text-align: center; margin-bottom: 48px;
+    section { padding: 80px 24px; }
+    .container { max-width: 1040px; margin: 0 auto; }
+    .section-tag {
+      display: inline-block; background: #EEF2FF; color: var(--primary);
+      font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 16px;
     }
-    .section-title h2 {
-      font-size: clamp(24px, 4vw, 36px);
-      font-weight: 800; letter-spacing: -0.5px;
-      margin-bottom: 8px;
-    }
-    .section-title p { color: var(--muted); font-size: 16px; }
+    .section-title { text-align: center; margin-bottom: 56px; }
+    .section-title h2 { font-size: clamp(26px, 4vw, 40px); font-weight: 800; letter-spacing: -1px; margin-bottom: 12px; }
+    .section-title p { color: var(--muted); font-size: 17px; max-width: 520px; margin: 0 auto; }
 
-    /* ── FEATURES ────────────────────────────────────────────── */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 24px;
-    }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
     .feature-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px 24px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px 28px;
+      transition: box-shadow .25s, transform .25s;
+    }
+    .feature-card:hover { box-shadow: 0 12px 40px rgba(13,71,161,.1); transform: translateY(-5px); }
+    .feature-icon { font-size: 40px; margin-bottom: 18px; }
+    .feature-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .feature-card p { color: var(--muted); font-size: 15px; line-height: 1.6; }
+
+    #tarifs { background: linear-gradient(180deg, #EEF2FF 0%, #F8FAFF 100%); }
+    .pricing-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; align-items: start; }
+    .pricing-group-title { font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; padding-left: 4px; }
+    .pricing-stack { display: flex; flex-direction: column; gap: 18px; }
+    .pricing-card {
+      background: var(--card); border: 2px solid var(--border);
+      border-radius: var(--radius); padding: 28px 26px; position: relative;
       transition: box-shadow .2s, transform .2s;
     }
-    .feature-card:hover { box-shadow: 0 8px 32px rgba(13,71,161,.1); transform: translateY(-4px); }
-    .feature-icon {
-      font-size: 36px; margin-bottom: 16px;
-    }
-    .feature-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
-    .feature-card p { color: var(--muted); font-size: 14px; }
-
-    /* ── PRICING ─────────────────────────────────────────────── */
-    #tarifs { background: #EEF2FF; }
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      align-items: start;
-    }
-    .plan-group-label {
-      font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
-      text-transform: uppercase; color: var(--muted);
-      margin-bottom: 12px; margin-top: 8px;
-    }
-    .pricing-col { display: flex; flex-direction: column; gap: 16px; }
-    .pricing-card {
-      background: var(--card);
-      border: 2px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px 24px;
-      position: relative;
-      transition: box-shadow .2s;
-    }
-    .pricing-card:hover { box-shadow: 0 8px 32px rgba(13,71,161,.12); }
+    .pricing-card:hover { box-shadow: 0 10px 40px rgba(13,71,161,.12); transform: translateY(-3px); }
     .pricing-card.featured { border-color: var(--primary); }
-    .pricing-card.best { border-color: var(--success); }
-    .plan-badge {
-      position: absolute; top: -13px; right: 20px;
-      font-size: 11px; font-weight: 700; letter-spacing: .5px;
-      padding: 4px 14px; border-radius: 20px;
-    }
-    .badge-popular { background: #FF6F00; color: #fff; }
-    .badge-best { background: var(--success); color: #fff; }
-    .badge-free { background: var(--primary); color: #fff; }
-    .plan-name { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
-    .plan-target { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
-    .plan-price {
-      font-size: 32px; font-weight: 800; color: var(--primary);
-      line-height: 1;
-    }
-    .plan-price.free-price { color: var(--success); }
-    .plan-price sup { font-size: 14px; font-weight: 600; vertical-align: super; }
-    .plan-period { font-size: 13px; color: var(--muted); margin-top: 4px; margin-bottom: 16px; }
-    .plan-discount {
-      display: inline-block;
-      background: #E8F5E9; color: var(--success);
-      font-size: 12px; font-weight: 700;
-      padding: 3px 10px; border-radius: 20px;
-      margin-bottom: 16px;
-    }
-    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-    .plan-features li {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 14px; color: var(--text);
-    }
-    .plan-features li::before {
-      content: '✓';
-      color: var(--success); font-weight: 700; font-size: 15px;
-      flex-shrink: 0;
-    }
-    .plan-cta {
-      display: block; text-align: center;
-      margin-top: 20px; padding: 12px;
-      border-radius: 50px; font-weight: 700; font-size: 14px;
-      background: var(--primary); color: #fff;
-      transition: opacity .2s;
-    }
-    .plan-cta:hover { opacity: .85; }
-    .plan-cta.free-cta { background: var(--success); }
+    .pricing-card.best-value { border-color: var(--success); }
+    .card-badge { position: absolute; top: -13px; right: 20px; font-size: 11px; font-weight: 800; letter-spacing: .5px; padding: 4px 14px; border-radius: 20px; }
+    .badge-free    { background: var(--primary); color: #fff; }
+    .badge-popular { background: var(--accent);  color: #fff; }
+    .badge-best    { background: var(--success);  color: #fff; }
+    .plan-name { font-size: 19px; font-weight: 800; margin-bottom: 3px; }
+    .plan-sub  { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+    .plan-price { font-size: 34px; font-weight: 800; color: var(--primary); line-height: 1; }
+    .plan-price.is-free { color: var(--success); }
+    .plan-price small { font-size: 15px; font-weight: 600; }
+    .plan-period { font-size: 13px; color: var(--muted); margin: 6px 0 14px; }
+    .plan-save { display: inline-block; background: #E8F5E9; color: var(--success); font-size: 12px; font-weight: 700; padding: 3px 11px; border-radius: 20px; margin-bottom: 18px; }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .plan-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text); }
+    .plan-features li::before { content: '✓'; color: var(--success); font-weight: 800; font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+    .plan-btn { display: block; text-align: center; margin-top: 22px; padding: 13px; border-radius: 50px; font-weight: 700; font-size: 15px; transition: opacity .2s, transform .2s; }
+    .plan-btn:hover { opacity: .88; transform: translateY(-1px); }
+    .plan-btn.primary-btn { background: var(--primary); color: #fff; }
+    .plan-btn.success-btn { background: var(--success); color: #fff; }
 
-    /* ── HOW IT WORKS ────────────────────────────────────────── */
-    .steps {
-      display: flex; flex-direction: column; gap: 24px;
-      max-width: 640px; margin: 0 auto;
+    #demo { background: #0A1929; color: #fff; }
+    #demo .section-tag { background: rgba(255,255,255,0.1); color: #FFD54F; }
+    #demo .section-title h2 { color: #fff; }
+    #demo .section-title p { color: rgba(255,255,255,.6); }
+    .video-wrapper {
+      max-width: 800px; margin: 0 auto;
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0,0,0,.5);
+      position: relative; background: #000;
     }
-    .step {
-      display: flex; gap: 20px; align-items: flex-start;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
+    .video-wrapper iframe {
+      width: 100%; aspect-ratio: 16/9;
+      border: none; display: block;
     }
+    .video-placeholder {
+      width: 100%; aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #0D47A1, #1976D2);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 16px;
+      cursor: pointer;
+    }
+    .play-btn {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      border: 3px solid rgba(255,255,255,.5);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
+      transition: background .2s, transform .2s;
+    }
+    .video-placeholder:hover .play-btn { background: rgba(255,111,0,.8); transform: scale(1.1); }
+    .video-placeholder p { color: rgba(255,255,255,.7); font-size: 15px; }
+    .video-placeholder strong { color: #fff; font-size: 18px; }
+
+    #comment { background: var(--card); }
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; }
+    .step-card { text-align: center; }
     .step-num {
-      background: var(--primary); color: #fff;
-      width: 40px; height: 40px; border-radius: 50%;
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), #1976D2);
+      color: #fff; font-weight: 800; font-size: 20px;
       display: flex; align-items: center; justify-content: center;
-      font-weight: 800; font-size: 16px; flex-shrink: 0;
+      margin: 0 auto 18px; box-shadow: 0 4px 16px rgba(13,71,161,.3);
     }
-    .step-content h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
-    .step-content p { color: var(--muted); font-size: 14px; }
+    .step-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .step-card p { color: var(--muted); font-size: 14px; line-height: 1.6; }
 
-    /* ── DOWNLOAD ────────────────────────────────────────────── */
-    #telecharger {
-      background: linear-gradient(135deg, var(--primary) 0%, #1976D2 100%);
-      color: #fff; text-align: center;
-    }
-    #telecharger h2 {
-      font-size: clamp(24px, 4vw, 36px);
-      font-weight: 800; margin-bottom: 12px;
-    }
-    #telecharger p { opacity: .85; margin-bottom: 32px; font-size: 16px; }
-    .download-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .btn-download {
-      background: #fff; color: var(--primary);
-      font-weight: 700; font-size: 15px;
-      padding: 14px 28px; border-radius: 50px;
-      display: inline-flex; align-items: center; gap: 8px;
-      transition: transform .2s;
-    }
-    .btn-download:hover { transform: translateY(-2px); }
-    .btn-whatsapp {
-      background: #25D366; color: #fff;
-      font-weight: 700; font-size: 15px;
-      padding: 14px 28px; border-radius: 50px;
-      display: inline-flex; align-items: center; gap: 8px;
-      transition: transform .2s;
-    }
-    .btn-whatsapp:hover { transform: translateY(-2px); }
+    #telecharger { background: linear-gradient(135deg, #0A2472 0%, #0D47A1 60%, #1565C0 100%); color: #fff; text-align: center; }
+    #telecharger h2 { font-size: clamp(26px, 4vw, 42px); font-weight: 800; letter-spacing: -1px; margin-bottom: 14px; }
+    #telecharger p { opacity: .8; font-size: 17px; margin-bottom: 36px; }
+    .cta-btns { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+    .btn-white { background: #fff; color: var(--primary); font-weight: 700; font-size: 15px; padding: 15px 32px; border-radius: 50px; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 20px rgba(0,0,0,.15); transition: transform .2s; }
+    .btn-white:hover { transform: translateY(-2px); }
+    .btn-wa { background: #25D366; color: #fff; font-weight: 700; font-size: 15px; padding: 15px 32px; border-radius: 50px; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 20px rgba(37,211,102,.35); transition: transform .2s; }
+    .btn-wa:hover { transform: translateY(-2px); }
 
-    /* ── FOOTER ──────────────────────────────────────────────── */
-    footer {
-      background: #0A1929; color: rgba(255,255,255,.6);
-      text-align: center; padding: 32px 24px;
-      font-size: 14px;
-    }
-    footer strong { color: #fff; }
+    footer { background: #050D1A; color: rgba(255,255,255,.5); padding: 40px 24px; text-align: center; font-size: 14px; }
+    .footer-logo { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+    .footer-logo span { color: #FFD54F; }
+    .footer-tagline { margin-bottom: 20px; }
+    .footer-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 24px; }
+    .footer-links a { color: rgba(255,255,255,.5); font-size: 13px; transition: color .2s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-copy { font-size: 12px; }
 
-    /* ── WHATSAPP FLOAT ──────────────────────────────────────── */
     .wa-float {
-      position: fixed; bottom: 24px; right: 24px; z-index: 999;
-      background: #25D366;
-      width: 56px; height: 56px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 20px rgba(37,211,102,.5);
-      font-size: 26px;
-      transition: transform .2s;
+      position: fixed; bottom: 28px; right: 28px; z-index: 999;
+      background: #25D366; width: 58px; height: 58px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 26px;
+      box-shadow: 0 6px 24px rgba(37,211,102,.5); transition: transform .2s;
     }
     .wa-float:hover { transform: scale(1.1); }
 
-    /* ── RESPONSIVE ──────────────────────────────────────────── */
     @media (max-width: 600px) {
-      .stats { gap: 24px; }
-      .hero-btns { flex-direction: column; align-items: center; }
-      .download-btns { flex-direction: column; align-items: center; }
+      .hero-btns, .cta-btns { flex-direction: column; align-items: center; }
+      .trust-bar { gap: 28px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <nav>
-    <div class="nav-logo">MyBiz<span>Pro</span></div>
-    <a href="https://wa.me/224628216544?text=Bonjour%2C%20je%20veux%20essayer%20MyBizPro" class="nav-cta" target="_blank">
-      Essai Gratuit
-    </a>
-  </nav>
+<nav>
+  <div class="nav-logo">MyBiz<span>Pro</span></div>
+  <div class="nav-links">
+    <a href="#fonctionnalites">Fonctionnalités</a>
+    <a href="#tarifs">Tarifs</a>
+    <a href="#demo">Démo</a>
+    <a href="#comment">Comment ça marche</a>
+    <a href="#telecharger">Télécharger</a>
+  </div>
+  <a href="https://wa.me/224628216544?text=Bonjour%2C%20je%20veux%20essayer%20MyBizPro" class="nav-cta" target="_blank">Essai Gratuit</a>
+</nav>
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="badge">🇬🇳 Fait pour les ingénieurs guinéens</div>
-    <h1>Gérez vos devis<br>comme un <span>Pro</span></h1>
-    <p class="tagline">
-      Le premier logiciel de devis professionnel conçu pour les ingénieurs et bureaux d'études en Guinée.
-    </p>
+<div class="hero">
+  <div class="hero-content">
+    <div class="badge">⚡ Conçu pour les ingénieurs professionnels</div>
+    <h1>Votre Business.<br><span>Vos Règles.</span></h1>
+    <p class="tagline">Le logiciel tout-en-un de devis et gestion de projets pour ingénieurs et professionnels de la construction.</p>
     <div class="hero-btns">
-      <a href="#telecharger" class="btn-primary">
-        📲 Télécharger gratuitement
-      </a>
-      <a href="#tarifs" class="btn-secondary">
-        Voir les tarifs
-      </a>
+      <a href="#telecharger" class="btn-primary">📲 Essai gratuit — 7 jours</a>
+      <a href="#tarifs" class="btn-ghost">Voir les tarifs</a>
     </div>
   </div>
+</div>
 
-  <!-- STATS -->
-  <div class="stats">
-    <div class="stat-item">
-      <strong>7 jours</strong>
-      <span>Essai gratuit</span>
+<div class="trust-bar">
+  <div class="trust-item"><strong>7 jours</strong><span>Essai gratuit</span></div>
+  <div class="trust-item"><strong>100%</strong><span>Fonctionne hors ligne</span></div>
+  <div class="trust-item"><strong>Android</strong><span>Compatible</span></div>
+  <div class="trust-item"><strong>0</strong><span>Frais cachés</span></div>
+</div>
+
+<section id="fonctionnalites">
+  <div class="container">
+    <div class="section-title">
+      <div class="section-tag">Fonctionnalités</div>
+      <h2>Tout ce dont vous avez besoin</h2>
+      <p>Conçu pour les ingénieurs qui veulent se concentrer sur leur travail, pas sur la paperasse.</p>
     </div>
-    <div class="stat-item">
-      <strong>50 000 GNF</strong>
-      <span>Plan étudiant</span>
-    </div>
-    <div class="stat-item">
-      <strong>Android</strong>
-      <span>Compatible</span>
-    </div>
-    <div class="stat-item">
-      <strong>100%</strong>
-      <span>Données locales</span>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📄</div>
+        <h3>Devis Professionnels</h3>
+        <p>Créez des devis détaillés avec calcul automatique des matériaux, main-d'œuvre et marges. Export PDF en un clic.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏗️</div>
+        <h3>Calculateur de Construction</h3>
+        <p>Calculez instantanément les volumes de béton, les quantités d'armatures et les estimations de matériaux.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Export PDF</h3>
+        <p>Générez des documents PDF propres et professionnels à partager directement avec vos clients depuis votre téléphone.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👥</div>
+        <h3>Gestion Clients & Projets</h3>
+        <p>Conservez un historique complet de vos clients, projets et paiements en un seul endroit organisé.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>Suivi des Paiements</h3>
+        <p>Enregistrez chaque paiement reçu, suivez les soldes en attente et gardez un historique complet des règlements par client et par projet.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧾</div>
+        <h3>Reçus de Paiement</h3>
+        <p>Générez et partagez des reçus officiels en PDF à chaque paiement. Vos clients reçoivent une preuve instantanée, vous gardez une trace professionnelle.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Sécurisé & Privé</h3>
+        <p>Toutes vos données restent sur votre appareil. Pas de cloud, pas de collecte de données, pas d'abonnement caché.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📡</div>
+        <h3>Fonctionne Hors Ligne</h3>
+        <p>Pas besoin d'internet. Utilisez l'app partout — sur le chantier, sur le terrain, où que vous soyez.</p>
+      </div>
     </div>
   </div>
+</section>
 
-  <!-- FEATURES -->
-  <section id="fonctionnalites">
-    <div class="container">
-      <div class="section-title">
-        <h2>Tout ce dont vous avez besoin</h2>
-        <p>Un outil complet pour gérer votre activité d'ingénierie</p>
+<section id="tarifs">
+  <div class="container">
+    <div class="section-title">
+      <div class="section-tag">Tarifs</div>
+      <h2>Des tarifs simples et transparents</h2>
+      <p>Pas de surprises. Payez une fois, utilisez pleinement. Activation instantanée via WhatsApp.</p>
+    </div>
+    <div class="pricing-wrapper">
+
+      <div class="pricing-stack">
+        <div class="pricing-group-title">Démarrer</div>
+        <div class="pricing-card">
+          <span class="card-badge badge-free">GRATUIT</span>
+          <div class="plan-name">Essai</div>
+          <div class="plan-sub">Découvrez l'app sans engagement</div>
+          <div class="plan-price is-free">Gratuit</div>
+          <div class="plan-period">7 jours d'accès complet</div>
+          <ul class="plan-features">
+            <li>Devis illimités</li>
+            <li>Export PDF</li>
+            <li>Calculateur de construction</li>
+            <li>Aucune carte requise</li>
+          </ul>
+          <a href="#telecharger" class="plan-btn success-btn">Télécharger maintenant</a>
+        </div>
       </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">📄</div>
-          <h3>Devis Professionnels</h3>
-          <p>Créez des devis détaillés avec calcul automatique des matériaux, main-d'œuvre et marges.</p>
+
+      <div class="pricing-stack">
+        <div class="pricing-group-title">Étudiant</div>
+        <div class="pricing-card featured">
+          <span class="card-badge badge-popular">POPULAIRE</span>
+          <div class="plan-name">Étudiant — 1 mois</div>
+          <div class="plan-sub">Étudiants universitaires</div>
+          <div class="plan-price">50 000 <small>GNF</small></div>
+          <div class="plan-period">30 jours d'accès</div>
+          <span class="plan-save">-50% tarif étudiant</span>
+          <ul class="plan-features">
+            <li>Tout de l'Essai</li>
+            <li>Gestion de projets</li>
+            <li>Support email</li>
+          </ul>
+          <a href="https://wa.me/224628216544?text=Bonjour%2C%20je%20veux%20le%20plan%20Etudiant%201%20mois%20(50%20000%20GNF)" class="plan-btn primary-btn" target="_blank">Commander par WhatsApp</a>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">🏗️</div>
-          <h3>Calculateur Béton</h3>
-          <p>Calculez automatiquement le volume de béton, les armatures et les quantités de matériaux.</p>
+        <div class="pricing-card">
+          <div class="plan-name">Étudiant — Semestre</div>
+          <div class="plan-sub">3 mois d'accès</div>
+          <div class="plan-price">120 000 <small>GNF</small></div>
+          <div class="plan-period">90 jours d'accès</div>
+          <span class="plan-save">-20% vs mensuel</span>
+          <ul class="plan-features">
+            <li>Tout de l'Essai</li>
+            <li>Gestion de projets</li>
+            <li>Support email</li>
+          </ul>
+          <a href="https://wa.me/224628216544?text=Bonjour%2C%20je%20veux%20le%20plan%20Etudiant%20Semestre%20(120%20000%20GNF)" class="plan-btn primary-btn" target="_blank">Commander par WhatsApp</a>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">📊</div>
-          <h3>Export PDF</h3>
-          <p>Générez des PDF propres et professionnels à envoyer directement à vos clients.</p>
+      </div>
+
+      <div class="pricing-stack">
+        <div class="pricing-group-title">Professionnel</div>
+        <div class="pricing-card">
+          <div class="plan-name">Solo — Mensuel</div>
+          <div class="plan-sub">Ingénieur indépendant</div>
+          <div class="plan-price">100 000 <small>GNF</small></div>
+          <div class="plan-period">30 jours d'accès</div>
+          <ul class="plan-features">
+            <li>Tout de l'Essai</li>
+            <li>Gestion clients & projets</li>
+            <li>Support prioritaire</li>
+          </ul>
+          <a href="https://wa.me/224628216544?text=Bonjour%2C%20je%20veux%20le%20plan%20Solo%20Mensuel%20(100%20000%20GNF)" class="plan-btn primary-btn" target="_blank">Commander par WhatsApp</a>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">👥</div>
-          <h3>Gestion Clients</h3>
-          <p>Gardez un historique complet de vos clients, projets et paiements en un seul endroit.</p>
+        <div class="pricing-card">
+          <div class="plan-name">Solo — Trimestriel</div>
+          <div class="plan-sub">3 mois d'accès</div>
+          <div class="plan-price">250 000 <small>GNF</small></div>
+          <div class="plan-period">90 jours d'accès</div>
+          <span class="plan-save">-17% vs mensuel</span>
+          <ul class="plan-features">
+            <li>Tout Solo Mensuel</li>
+            <li>Mises à jour incluses</li>
+          </ul>
+          <a href="https://wa.me/224628216544?text=Bonjour%2C%20je%20veux%20le%20plan%20Solo%20Trimestriel%20(250%20000%20GNF)" class="plan-btn primary-btn" target="_blank">Commander par WhatsApp</a>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">🔒</div>
-          <h3>Données Sécurisées</h3>
-          <p>Toutes vos données restent sur votre appareil. Aucun cloud, aucun abonnement caché.</p>
+        <div class="pricing-card best-value">
+          <span class="card-badge badge-best">MEILLEURE OFFRE</span>
+          <div class="plan-name">Solo — Annuel</div>
+          <div class="plan-sub">1 an d'accès complet</div>
+          <div class="plan-price">800 000 <small>GNF</small></div>
+          <div class="plan-period">365 jours d'accès</div>
+          <span class="plan-save">-33% vs mensuel</span>
+          <ul class="plan-features">
+            <li>Tout Solo Trimestriel</li>
+            <li>Support VIP</li>
+            <li>Accès aux nouvelles fonctionnalités</li>
+          </ul>
+          <a href="https://wa.me/224628216544?text=Bonjour%2C%20je%20veux%20le%20plan%20Solo%20Annuel%20(800%20000%20GNF)" class="plan-btn primary-btn" target="_blank">Commander par WhatsApp</a>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">📱</div>
-          <h3>Fonctionne Hors Ligne</h3>
-          <p>Pas besoin d'internet pour travailler. Parfait pour les chantiers.</p>
-        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="container">
+    <div class="section-title">
+      <div class="section-tag">Démo</div>
+      <h2>Voir MyBizPro en action</h2>
+      <p>Regardez comment créer un devis professionnel en moins de 2 minutes.</p>
+    </div>
+    <div class="video-wrapper">
+      <iframe src="https://www.youtube.com/embed/Np6Bw3z3hM8" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<section id="comment">
+  <div class="container">
+    <div class="section-title">
+      <div class="section-tag">Comment ça marche</div>
+      <h2>Activez votre licence en 4 étapes</h2>
+      <p>Tout se fait par WhatsApp — simple et rapide.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Téléchargez l'app</h3>
+        <p>Installez MyBizPro sur votre Android et profitez de 7 jours d'accès gratuit immédiatement.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Copiez votre ID Machine</h3>
+        <p>Ouvrez l'app, allez dans Activation et copiez votre identifiant unique. Envoyez-le sur WhatsApp avec votre plan choisi.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Effectuez le paiement</h3>
+        <p>Payez par Orange Money au numéro indiqué. Envoyez la capture de confirmation par WhatsApp.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h3>Recevez votre clé</h3>
+        <p>Nous vous envoyons votre clé de licence par WhatsApp. Collez-la dans l'app et c'est parti !</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PRICING -->
-  <section id="tarifs">
-    <div class="container">
-      <div class="section-title">
-        <h2>Tarifs transparents</h2>
-        <p>Paiement par Orange Money · Activation instantanée par WhatsApp</p>
-      </div>
-      <div class="pricing-grid">
-
-        <!-- Colonne Essai -->
-        <div class="pricing-col">
-          <div class="plan-group-label">Découverte</div>
-          <div class="pricing-card">
-            <span class="plan-badge badge-free">GRATUIT</span>
-            <div class="plan-name">Essai</div>
-            <div class="plan-target">Pour découvrir l'application</div>
-            <div class="plan-price free-price">0 GNF</div>
-            <div class="plan-period">7 jours gratuits</div>
-            <ul class="plan-features">
-              <li>Devis illimités</li>
-              <li>Export PDF</li>
-              <li>Calculateur béton</li>
-              <li>Aucune carte requise</li>
-            </ul>
-            <a href="#telecharger" class="plan-cta free-cta">Télécharger maintenant</a>
-          </div>
-        </div>
-
-        <!-- Colonne Étudiant -->
-        <div class="pricing-col">
-          <div class="plan-group-label">Étudiant</div>
-          <div class="pricing-card featured">
-            <span class="plan-badge badge-popular">POPULAIRE</span>
-            <div class="plan-name">Étudiant — 1 mois</div>
-            <div class="plan-target">Étudiants universitaires</div>
-            <div class="plan-price"><sup></sup>50 000 <sup style="font-size:14px;font-weight:600">GNF</sup></div>
-            <div class="plan-period">30 jours d'accès</div>
-            <span class="plan-discount">-50% tarif étudiant</span>
-            <ul class="plan-features">
-              <li>Tout de l'essai</li>
-              <li>Gestion projets</li>
-              <li>Support email</li>
-            </ul>
-            <a href="https://wa.me/224628216544?text=Bonjour%2C%20je%20veux%20le%20plan%20Etudiant%2030j%20(50%20000%20GNF)" class="plan-cta" target="_blank">Commander par WhatsApp</a>
-          </div>
-          <div class="pricing-card">
-            <div class="plan-name">Étudiant — Semestre</div>
-            <div class="plan-target">Semestre universitaire</div>
-            <div class="plan-price"><sup></sup>120 000 <sup style="font-size:14px;font-weight:600">GNF</sup></div>
-            <div class="plan-period">90 jours d'accès</div>
-            <span class="plan-discount">-20% vs mensuel</span>
-            <ul class="plan-features">
-              <li>Tout de l'essai</li>
-              <li>Gestion projets</li>
-              <li>Support email</li>
-            </ul>
-            <a href="https://wa.me/224628216544?text=Bonjour%2C%20je%20veux%20le%20plan%20Etudiant%20Semestre%20(120%20000%20GNF)" class="plan-cta" target="_blank">Commander par WhatsApp</a>
-          </div>
-        </div>
-
-        <!-- Colonne Solo -->
-        <div class="pricing-col">
-          <div class="plan-group-label">Professionnel</div>
-          <div class="pricing-card">
-            <div class="plan-name">Solo — 1 mois</div>
-            <div class="plan-target">Ingénieur indépendant</div>
-            <div class="plan-price"><sup></sup>100 000 <sup style="font-size:14px;font-weight:600">GNF</sup></div>
-            <div class="plan-period">30 jours d'accès</div>
-            <ul class="plan-features">
-              <li>Tout de l'essai</li>
-              <li>Gestion clients & projets</li>
-              <li>Support prioritaire</li>
-            </ul>
-            <a href="https://wa.me/224628216544?text=Bonjour%2C%20je%20veux%20le%20plan%20Solo%2030j%20(100%20000%20GNF)" class="plan-cta" target="_blank">Commander par WhatsApp</a>
-          </div>
-          <div class="pricing-card">
-            <div class="plan-name">Solo — Trimestriel</div>
-            <div class="plan-target">3 mois d'accès</div>
-            <div class="plan-price"><sup></sup>250 000 <sup style="font-size:14px;font-weight:600">GNF</sup></div>
-            <div class="plan-period">90 jours d'accès</div>
-            <span class="plan-discount">-17% vs mensuel</span>
-            <ul class="plan-features">
-              <li>Tout Solo mensuel</li>
-              <li>Mises à jour incluses</li>
-            </ul>
-            <a href="https://wa.me/224628216544?text=Bonjour%2C%20je%20veux%20le%20plan%20Solo%20Trimestriel%20(250%20000%20GNF)" class="plan-cta" target="_blank">Commander par WhatsApp</a>
-          </div>
-          <div class="pricing-card best">
-            <span class="plan-badge badge-best">MEILLEURE OFFRE</span>
-            <div class="plan-name">Solo — Annuel</div>
-            <div class="plan-target">1 an d'accès complet</div>
-            <div class="plan-price"><sup></sup>800 000 <sup style="font-size:14px;font-weight:600">GNF</sup></div>
-            <div class="plan-period">365 jours d'accès</div>
-            <span class="plan-discount">-33% vs mensuel</span>
-            <ul class="plan-features">
-              <li>Tout Solo trimestriel</li>
-              <li>Support VIP</li>
-              <li>Accès nouvelles fonctionnalités</li>
-            </ul>
-            <a href="https://wa.me/224628216544?text=Bonjour%2C%20je%20veux%20le%20plan%20Solo%20Annuel%20(800%20000%20GNF)" class="plan-cta" target="_blank">Commander par WhatsApp</a>
-          </div>
-        </div>
-
-      </div>
+<section id="telecharger">
+  <div class="container">
+    <h2>Prêt à travailler plus intelligemment ?</h2>
+    <p>7 jours gratuits · Aucune carte bancaire · Fonctionne hors ligne</p>
+    <div class="cta-btns">
+      <a href="https://drive.google.com/file/d/1reCXvRm8IYAZoMktdbkX4-92VSJBIbxB/view?usp=sharing" class="btn-white">📲 Télécharger pour Android</a>
+      <a href="https://wa.me/224628216544?text=Bonjour%2C%20je%20veux%20essayer%20MyBizPro" class="btn-wa" target="_blank">💬 Contacter sur WhatsApp</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- HOW IT WORKS -->
-  <section id="comment">
-    <div class="container">
-      <div class="section-title">
-        <h2>Comment activer votre licence ?</h2>
-        <p>4 étapes simples, tout se fait par WhatsApp</p>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div class="step-content">
-            <h3>Téléchargez l'application</h3>
-            <p>Installez MyBizPro sur votre téléphone Android. Profitez des 7 jours d'essai gratuit dès l'installation.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div class="step-content">
-            <h3>Copiez votre ID Machine</h3>
-            <p>Dans l'app, allez dans Activation et copiez votre identifiant unique. Envoyez-le nous par WhatsApp avec votre plan choisi.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div class="step-content">
-            <h3>Effectuez le paiement</h3>
-            <p>Payez par Orange Money au numéro indiqué. Envoyez la capture de confirmation par WhatsApp.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <div class="step-content">
-            <h3>Recevez votre clé de licence</h3>
-            <p>Nous vous envoyons votre clé d'activation par WhatsApp. Collez-la dans l'app et c'est parti !</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<footer>
+  <div class="footer-logo">MyBiz<span>Pro</span></div>
+  <div class="footer-tagline">Logiciel professionnel pour ingénieurs.</div>
+  <div class="footer-links">
+    <a href="#fonctionnalites">Fonctionnalités</a>
+    <a href="#tarifs">Tarifs</a>
+    <a href="#comment">Comment ça marche</a>
+    <a href="https://wa.me/224628216544" target="_blank">Support</a>
+  </div>
+  <div class="footer-copy">© 2025 MyBizPro · Tous droits réservés</div>
+</footer>
 
-  <!-- DOWNLOAD -->
-  <section id="telecharger">
-    <div class="container">
-      <h2>Prêt à commencer ?</h2>
-      <p>7 jours gratuits · Aucune carte bancaire · Fonctionne hors ligne</p>
-      <div class="download-btns">
-        <a href="https://drive.google.com/file/d/1reCXvRm8IYAZoMktdbkX4-92VSJBIbxB/view?usp=sharing" class="btn-download">
-          📲 Télécharger l'APK Android
-        </a>
-        <a href="https://wa.me/224628216544?text=Bonjour%2C%20je%20veux%20essayer%20MyBizPro" class="btn-whatsapp" target="_blank">
-          💬 Contacter sur WhatsApp
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <p><strong>MyBizPro</strong> — Votre Business. Vos Règles.</p>
-    <p style="margin-top:8px">
-      📞 WhatsApp : +224 628 216 544 &nbsp;|&nbsp;
-      📧 support@mybizpro.gn
-    </p>
-    <p style="margin-top:16px;font-size:12px">
-      © 2025 MyBizPro · Conakry, Guinée · Tous droits réservés
-    </p>
-  </footer>
-
-  <!-- WHATSAPP FLOATING BUTTON -->
-  <a class="wa-float" href="https://wa.me/224628216544?text=Bonjour%2C%20je%20veux%20essayer%20MyBizPro" target="_blank" title="Nous contacter sur WhatsApp">
-    💬
-  </a>
+<a class="wa-float" href="https://wa.me/224628216544?text=Bonjour%2C%20je%20veux%20essayer%20MyBizPro" target="_blank" title="Nous contacter sur WhatsApp">💬</a>
 
 </body>
 </html>
